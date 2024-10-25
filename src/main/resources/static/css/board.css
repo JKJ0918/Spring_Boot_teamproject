@@ -1,0 +1,84 @@
+.board-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.sort-select {
+    padding: 5px;
+    width: 150px;
+}
+
+.search-container {
+    align-items: center;
+    width: 500px;
+    display: flex;
+}
+
+.search-input {
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.search-button, .write-button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 90px;
+    height: 34px;
+}
+
+.board-content {
+    margin-bottom: 20px;
+}
+
+.board-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.board-item h3 {
+    margin-top: 0;
+}
+
+.board-item span {
+    margin-right: 10px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.no-result {
+    text-align: center;
+    padding: 20px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+}
+
+.pagination {
+    text-align: center;
+}
+
+.pagination a {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
