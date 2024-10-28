@@ -1,6 +1,5 @@
 package com.kinder.kindergarten.entity;
 
-import com.kinder.kindergarten.constant.Employee.Status;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,7 +33,6 @@ public class Attendance {
     private LocalTime checkOut; // 퇴근시간
 
     @Column(name = "attendance_status")
-    @Enumerated(EnumType.STRING)
-    private Status status; // 출퇴근 상태
+    private String status; // 출퇴근 상태
 
 }

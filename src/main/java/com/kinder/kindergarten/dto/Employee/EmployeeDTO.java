@@ -4,15 +4,14 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter @Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public class EmployeeDTO {
 
     private Long id;
+    private String cleanup;
 
     @NotBlank(message = "이름은 필수 입력 값입니다.")
     private String name;
@@ -26,18 +25,22 @@ public class EmployeeDTO {
     private String password;
 
     @NotBlank(message = "전화번호는 필수 입력 값입니다.")
+    @Pattern(regexp = "\\d{3}-\\d{3,4}-\\d{4}", message = "전화번호 형식은 000-0000-0000입니다.")
     private String phone;
 
     @NotBlank(message = "직위는 필수 입력 값입니다.")
     private String position;
 
+    @NotBlank(message = "부서는 필수 입력 값입니다.")
+    private String department;
+
     @NotBlank(message = "재직상태는 필수 입력 값입니다.")
     @Pattern(regexp = "재직|퇴사", message = "유효하지 않은 재직상태입니다.")
     private String status;
 
-    @NotBlank(message = "급여는 필수 입력 값입니다.")
+    @NotNull(message = "급여는 필수 입력 값입니다.")
     @DecimalMin(value = "0", message = "급여는 0 이상이어야 합니다.")
-    private String salary;
+    private BigDecimal salary;
 
     @NotNull(message = "입사일은 필수 입력 값입니다.")
     private LocalDate hireDate;

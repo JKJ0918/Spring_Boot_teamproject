@@ -1,14 +1,15 @@
 package com.kinder.kindergarten.entity;
 
-import com.kinder.kindergarten.constant.Employee.Department;
 import com.kinder.kindergarten.constant.Employee.Position;
-import com.kinder.kindergarten.constant.Employee.Status;
+import com.kinder.kindergarten.dto.Employee.EmployeeDTO;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Table(name = "Employee")
 @Entity
@@ -41,17 +42,39 @@ public class Employee {
     private Position position; // 직원 직위
 
     @Column(name = "employee_department")
-    @Enumerated(EnumType.STRING)
-    private Department department; // 직원 부서
+    private String department; // 직원 부서
 
     @Column(name = "employee_status")
-    @Enumerated(EnumType.STRING)
-    private Status status; // 재직상태
+    private String status; // 재직상태
 
     @Column(name = "employee_salary", nullable = false)
-    private String salary; // 직원 급여
+    private BigDecimal salary; // 직원 급여
 
     @Column(name = "employee_hireDate")
     private LocalDate hireDate; // 입사날짜
 
+    // 사번의 자동번호 생성자
+    private static AtomicInteger autoNumberGenerator = new AtomicInteger(1);
+
+    public static Employee createEmployee(EmployeeDTO employeeDTO, PasswordEncoder passwordEncoder){
+
+        // 사번에 적용될 현재날짜
+        String currentDate = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        // 사번에 적용될 자동번호
+        int autoNumber = autoNumberGenerator.getAndIncrement();
+
+        Employee employee = new Employee();
+        employee.setCleanup(currentDate+autoNumber);
+        employee.setName(employeeDTO.getName());
+        employee.setEmail(employeeDTO.getEmail());
+        String password = passwordEncoder.encode(employeeDTO.getPassword());
+        employee.setPassword(password);
+        employee.setPhone(employeeDTO.getPhone());
+        employee.setPosition(employee.getPosition());
+        employee.setDepartment(employee.getDepartment());
+        employee.setStatus(employee.getStatus());
+        employee.setSalary(employeeDTO.getSalary());
+        employee.setHireDate(employeeDTO.getHireDate());
+        return employee;
+    }
 }
