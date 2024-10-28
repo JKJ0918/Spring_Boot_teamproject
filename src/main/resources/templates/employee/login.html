@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    * { padding: 0; margin: 0; }
+
+    html, body {
+      height: 100%;
+      background: #ffffff;
+    }
+
+    #container {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+    }
+
+    #loginBox {
+      width: 300px;
+      text-align: center;
+      background-color: #ffffff;
+    }
+    .input-form-box {
+      border: 0px solid #ff0000;
+      display: flex;
+      margin-bottom: 5px;
+    }
+    .input-form-box > span {
+      display: block;
+      text-align: left;
+      padding-top: 5px;
+      min-width: 65px;
+    }
+    .button-login-box {
+      margin: 10px 0;
+    }
+    #loginBoxTitle {
+      color:#000000;
+      font-weight: bold;
+      font-size: 32px;
+      text-transform: uppercase;
+      padding: 5px;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, #270a09, #8ca6ce);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    #inputBox {
+      margin: 10px;
+    }
+
+    #inputBox button {
+      padding: 3px 5px;
+    }
+  </style>
+</head>
+<body>
+<div id="container">
+  <form action="/employee/login" th:action="@{/login}" method="post">
+    <div id="loginBox">
+
+      <!-- 로그인 페이지 타이틀 -->
+      <div id="loginBoxTitle">MBC academy</div>
+      <!-- 아이디, 비번, 버튼 박스 -->
+      <div id="inputBox">
+        <div class="input-form-box"><span>아이디 </span><input type="text" name="email" class="form-control"></div>
+        <div class="input-form-box"><span>비밀번호 </span><input type="password" name="password" class="form-control"></div>
+        <div class="button-login-box" >
+          <button type="submit" class="btn btn-primary btn-xs">로그인</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>
