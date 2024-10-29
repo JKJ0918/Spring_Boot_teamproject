@@ -15,7 +15,6 @@ public class ScheduleEntity {
 
   @Id
   @Column(name="schedule_id")
-  @GeneratedValue(strategy = GenerationType.UUID)
   private String schedule_id;
 
   @Column(nullable = false)

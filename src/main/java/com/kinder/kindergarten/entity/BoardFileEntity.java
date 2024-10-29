@@ -16,19 +16,22 @@ public class BoardFileEntity extends TimeEntity {
 
   @Id
   @Column(name = "file_id")
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private String file_id;
+  private String fileId;
 
   @Column(nullable = false)
-  private String original_name;
+  private String originalName;
 
   @Column(nullable = false)
-  private String modified_name;
+  private String modifiedName;
 
   @Column(nullable = false)
-  private String file_path;
+  private String filePath;
 
   @Column(nullable = false)
-  private String main_file;
+  private String mainFile;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name="board_id", referencedColumnName = "board_id")
+  private BoardEntity boardEntity;
 
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{common/header}">
+<head>
+    <meta charset="UTF-8">
+    <title>글 보기</title>
+    <link rel="stylesheet" th:href="@{/css/board.css}">
+</head>
+<body>
+    <div class="board-container">
+        <div class="board-header">
+            <h2 th:text="${boardDTO.boardTitle}"></h2>
+            <div class="board-info">
+                <span th:text="'작성자: ' + ${boardDTO.boardWriter}"></span>
+                <span th:text="'조회수: ' + ${boardDTO.views}"></span>
+                <span th:text="'좋아요: ' + ${boardDTO.likes}"></span>
+                <span th:text="'작성일: ' + ${boardDTO.regi_date}"></span>
+            </div>
+        </div>
+
+        <div class="board-content">
+            <p th:text="${boardDTO.boardContents}"></p>
+        </div>
+
+        <div class="board-footer">
+            <button class="back-btn" onclick="history.back()">뒤로가기</button>
+        </div>
+    </div>
+
+    <!-- 첨부파일이 있는 경우 표시 -->
+    <div class="file-container" th:if="${boardDTO.BoardFileList != null and not #lists.isEmpty(boardDTO.BoardFileList)}">
+        <h3>첨부파일</h3>
+        <div th:each="file : ${boardDTO.BoardFileList}">
+            <a th:href="@{${file.filePath}}" th:text="${file.orignalName}"></a>
+        </div>
+    </div>
+</body>
+</html>

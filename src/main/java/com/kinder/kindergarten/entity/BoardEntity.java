@@ -6,42 +6,41 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.UUID;
 
 @Entity
 @Table(name = "board")
 @Getter  @Setter
 @ToString
+@DynamicInsert //insert시 null인 필드는 제외하기 ( @ColumnDefault 적용)
 public class BoardEntity extends TimeEntity {
+
 
   @Id
   @Column(name = "board_id")
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private String board_id;
+  private String boardId;
 
   @Column(nullable = false)
-  private String board_title;
+  private String boardTitle;
 
   @Column(nullable = false)
   @Lob
-  private String board_content;
+  private String boardContents;
 
   @Enumerated(EnumType.STRING)
   @Column(name = "board_type")
   private BoardType boardType;
 
   @Column(nullable = false)
-  private String board_writer;
-
-  @ManyToOne(optional = true)
-  @JoinColumn(name="file_id", nullable = true)
-  private BoardFileEntity boardFileEntity;
+  private String boardWriter;
 
   @ColumnDefault("0")
-  @Column(nullable = false)
   private Integer views;
 
   @ColumnDefault("0")
-  @Column(nullable = false)
   private Integer likes;
 
 }
